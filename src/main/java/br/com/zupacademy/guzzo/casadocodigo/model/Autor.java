@@ -2,6 +2,7 @@ package br.com.zupacademy.guzzo.casadocodigo.model;
 
 import java.time.OffsetDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Autor {
 	@NotNull
 	@NotBlank
 	@Email
+	@Column(unique = true)
 	private String email;
 
 	@NotNull
@@ -33,6 +35,10 @@ public class Autor {
 	private String descricao;
 
 	private OffsetDateTime dataRegistro = OffsetDateTime.now();
+
+	public Autor() {
+
+	}
 
 	public Autor(String nome, String email, String descricao) {
 		this.nome = nome;
