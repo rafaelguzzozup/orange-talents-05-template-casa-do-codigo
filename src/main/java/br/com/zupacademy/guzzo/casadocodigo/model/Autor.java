@@ -36,6 +36,7 @@ public class Autor {
 
 	private OffsetDateTime dataRegistro = OffsetDateTime.now();
 
+	@Deprecated
 	public Autor() {
 
 	}
@@ -44,6 +45,12 @@ public class Autor {
 		this.nome = nome;
 		this.email = email;
 		this.descricao = descricao;
+	}
+
+	@Override
+	public String toString() {
+		return "Autor [id=" + id + ", nome=" + nome + ", email=" + email + ", descricao=" + descricao
+				+ ", dataRegistro=" + dataRegistro + "]";
 	}
 
 }

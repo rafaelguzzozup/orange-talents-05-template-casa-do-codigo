@@ -30,7 +30,6 @@ public class UnicoRegistroValidator implements ConstraintValidator<UnicoRegistro
 		query.setParameter("id", valor);
 
 		List<?> resultado = query.getResultList();
-		System.out.println(" resultado " + resultado.isEmpty());
 		return resultado.isEmpty();
 
 	}
