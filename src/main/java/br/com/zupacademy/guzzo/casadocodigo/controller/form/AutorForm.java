@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.zupacademy.guzzo.casadocodigo.model.Autor;
+import br.com.zupacademy.guzzo.casadocodigo.validator.UnicoRegistro;
 import br.com.zupacademy.guzzo.casadocodigo.validator.VerificaEmailDuplicadoAutor;
 
 public class AutorForm {
@@ -17,7 +18,8 @@ public class AutorForm {
 	@NotNull
 	@NotBlank
 	@Email
-	@VerificaEmailDuplicadoAutor
+	//@VerificaEmailDuplicadoAutor
+	@UnicoRegistro(entidade = Autor.class, atributo = "email")
 	private String email;
 
 	@NotNull

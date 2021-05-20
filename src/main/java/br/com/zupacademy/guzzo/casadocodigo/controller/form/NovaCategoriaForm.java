@@ -5,12 +5,14 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import br.com.zupacademy.guzzo.casadocodigo.model.Categoria;
+import br.com.zupacademy.guzzo.casadocodigo.validator.UnicoRegistro;
 import br.com.zupacademy.guzzo.casadocodigo.validator.VerificaNomeDuplicadoCategoria;
 
 public class NovaCategoriaForm {
 
 	@NotBlank
-	@VerificaNomeDuplicadoCategoria
+	// @VerificaNomeDuplicadoCategoria
+	@UnicoRegistro(entidade = Categoria.class, atributo = "nome")
 	public String nome;
 
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
