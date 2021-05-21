@@ -32,15 +32,7 @@ public class LivroController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> cadastrar(@Valid @RequestBody NovoLivroForm livroForm) {
-
-		Categoria categoria = em.find(Categoria.class, livroForm.getIdCategoria());
-		Autor autor = em.find(Autor.class, livroForm.getIdAutor());
-
-		if (categoria == null || autor == null) {
-			return ResponseEntity.badRequest().body("O id de Categoria ou Autor não existe no banco!");
-		}
-
-		Livro livro = livroForm.converterParaLivro(categoria, autor);
+		Livro livro = livroForm.converterParaLivro(em);
 		em.persist(livro);
 		return ResponseEntity.ok().build();
 

@@ -3,6 +3,7 @@ package br.com.zupacademy.guzzo.casadocodigo.controller.form;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Lob;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Future;
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import br.com.zupacademy.guzzo.casadocodigo.model.Autor;
 import br.com.zupacademy.guzzo.casadocodigo.model.Categoria;
 import br.com.zupacademy.guzzo.casadocodigo.model.Livro;
+import br.com.zupacademy.guzzo.casadocodigo.validator.ExisteId;
 import br.com.zupacademy.guzzo.casadocodigo.validator.UnicoRegistro;
 
 public class NovoLivroForm {
@@ -48,9 +50,11 @@ public class NovoLivroForm {
 	private LocalDate dataPublicacao;
 
 	@NotNull
+	@ExisteId(entidade = Categoria.class, atributo = "id")
 	private Long idCategoria;
 
 	@NotNull
+	@ExisteId(entidade = Autor.class, atributo = "id")
 	private Long idAutor;
 
 	public NovoLivroForm(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo, String sumario,
@@ -67,7 +71,12 @@ public class NovoLivroForm {
 		this.idAutor = idAutor;
 	}
 
-	public Livro converterParaLivro(Categoria categoria, Autor autor) {
+	public Livro converterParaLivro(EntityManager em) {
+		@NotNull
+		Categoria categoria = em.find(Categoria.class, this.idCategoria);
+
+		@NotNull
+		Autor autor = em.find(Autor.class, this.idAutor);
 		return new Livro(titulo, resumo, sumario, preco, numeroPaginas, isbn, dataPublicacao, categoria, autor);
 	}
 
