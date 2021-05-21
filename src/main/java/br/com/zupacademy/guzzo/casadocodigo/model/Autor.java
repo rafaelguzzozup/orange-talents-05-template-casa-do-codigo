@@ -53,4 +53,24 @@ public class Autor {
 				+ ", dataRegistro=" + dataRegistro + "]";
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public OffsetDateTime getDataRegistro() {
+		return dataRegistro;
+	}
+
 }

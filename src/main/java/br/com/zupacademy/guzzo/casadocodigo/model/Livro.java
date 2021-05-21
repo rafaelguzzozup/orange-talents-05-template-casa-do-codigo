@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
@@ -54,11 +54,11 @@ public class Livro {
 	private LocalDate dataPublicacao;
 
 	@NotNull
-	@OneToOne
+	@ManyToOne
 	private Categoria categoria;
 
 	@NotNull
-	@OneToOne
+	@ManyToOne
 	private Autor autor;
 
 	@Deprecated
@@ -93,6 +93,38 @@ public class Livro {
 
 	public String getTitulo() {
 		return titulo;
+	}
+
+	public String getResumo() {
+		return resumo;
+	}
+
+	public String getSumario() {
+		return sumario;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public Integer getNumeroPaginas() {
+		return numeroPaginas;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public LocalDate getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public Autor getAutor() {
+		return autor;
 	}
 
 }
