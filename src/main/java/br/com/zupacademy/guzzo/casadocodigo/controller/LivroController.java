@@ -1,5 +1,7 @@
 package br.com.zupacademy.guzzo.casadocodigo.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -7,11 +9,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zupacademy.guzzo.casadocodigo.controller.dto.LivroDto;
 import br.com.zupacademy.guzzo.casadocodigo.controller.form.NovoLivroForm;
 import br.com.zupacademy.guzzo.casadocodigo.model.Autor;
 import br.com.zupacademy.guzzo.casadocodigo.model.Categoria;
@@ -43,6 +47,13 @@ public class LivroController {
 		em.persist(livro);
 		return ResponseEntity.ok().build();
 
+	}
+
+	@GetMapping
+	public List<LivroDto> listaDeLivros() {
+		List<Livro> livros = em.createQuery("from Livro").getResultList();
+
+		return LivroDto.converterListaLivrosParaDto(livros);
 	}
 
 }
