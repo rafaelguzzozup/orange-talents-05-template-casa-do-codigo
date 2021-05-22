@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import br.com.zupacademy.guzzo.casadocodigo.controller.dto.DetalheLivroDto;
 import br.com.zupacademy.guzzo.casadocodigo.controller.dto.LivroDto;
@@ -49,7 +51,8 @@ public class LivroController {
 	public ResponseEntity<DetalheLivroDto> detalheLivro(@PathVariable Long id) {
 		Livro livro = em.find(Livro.class, id);
 		if (livro == null) {
-			return ResponseEntity.notFound().build();
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, " Livro não encontrado com o id " + id);
+			// return ResponseEntity.notFound().build();
 		}
 
 		return ResponseEntity.ok(new DetalheLivroDto(livro));
