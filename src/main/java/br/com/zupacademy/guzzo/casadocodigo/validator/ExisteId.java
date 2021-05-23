@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ExisteId {
 
-	String message() default "Id já existente no banco de dados";
+	String message() default "O id informado não existe no banco de dados";
 
 	Class<?>[] groups() default {};
 

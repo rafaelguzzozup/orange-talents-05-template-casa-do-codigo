@@ -23,7 +23,8 @@ public class Estado {
 	private Pais pais;
 
 	@Deprecated
-	public Estado() {}
+	public Estado() {
+	}
 
 	public Estado(@NotBlank String nome, @NotNull Pais pais) {
 		this.nome = nome;
@@ -40,6 +41,10 @@ public class Estado {
 
 	public Pais getPais() {
 		return pais;
+	}
+
+	public boolean pertenceAPais(Pais pais) {
+		return pais.getId() == this.pais.getId();
 	}
 
 }
