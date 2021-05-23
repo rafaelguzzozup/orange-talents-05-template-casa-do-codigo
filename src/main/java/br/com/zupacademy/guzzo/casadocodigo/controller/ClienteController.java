@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zupacademy.guzzo.casadocodigo.controller.form.ClienteForm;
+import br.com.zupacademy.guzzo.casadocodigo.validator.ValidaSeEstadoPertenceAPais;
 import br.com.zupacademy.guzzo.casadocodigo.validator.ValidaSePaisTemEstados;
 
 @RestController
@@ -28,9 +29,12 @@ public class ClienteController {
 	@Autowired
 	private ValidaSePaisTemEstados validaSePaisTemEstados;
 
+	@Autowired
+	private ValidaSeEstadoPertenceAPais validaSeEstadoPertenceAPais;
+
 	@InitBinder
 	public void init(WebDataBinder binder) {
-		binder.addValidators(validaSePaisTemEstados);
+		binder.addValidators(validaSePaisTemEstados, validaSeEstadoPertenceAPais);
 	}
 
 	@PostMapping

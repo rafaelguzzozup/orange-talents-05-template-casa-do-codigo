@@ -24,6 +24,11 @@ public class ExisteIdValidator implements ConstraintValidator<ExisteId, Long> {
 
 	@Override
 	public boolean isValid(Long value, ConstraintValidatorContext context) {
+		// adicionado para usar em atributos que não são obrigatorios
+		if (value == null) {
+			return true;
+		}
+
 		Query query = em.createQuery("select 1 from " + entidade.getName() + " where " + atributo + "=:value");
 		query.setParameter("value", value);
 

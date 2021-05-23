@@ -49,6 +49,7 @@ public class ClienteForm {
 	@ExisteId(entidade = Pais.class, atributo = "id")
 	private Long IdPais;
 
+	@ExisteId(entidade = Estado.class, atributo = "id")
 	private Long idEstado;
 
 	public ClienteForm(@NotBlank @Email String email, @NotBlank String nome, @NotBlank String sobrenome,
